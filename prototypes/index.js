@@ -18,17 +18,28 @@ const { dinosaurs, humans, movies } = require('./datasets/dinosaurs');
 
 // DATASET: kitties from ./datasets/kitties
 const kittyPrompts = {
-  orangePetNames() {
+ 
+  orangePetNames(pets) {
+    var orangePets = pets.filter((pet) => {
+      return pet.color === 'orange';
+    })
+    var orangePetNames = orangePets.map((pet) => {
+    return pet.name;
+  })
+  return orangePetNames;
     // Return an array of just the names of kitties who are orange e.g.
-        // ['Tiger', 'Snickers']
-
-        /* CODE GOES HERE */
-
+    // ['Tiger', 'Snickers']
+     
     // Annotation:
-    // Write your annotation here as a comment
+    // i need to run a prototype method that will filter each 
+    // use object.keys thing
   },
 
-  sortByAge() {
+  sortByAge(pets) {
+    var petAges = pets.sort((first, last) => {
+      return last.age - first.age;
+    }) 
+     return petAges;
     // Sort the kitties by their age
 
     /* CODE GOES HERE */
@@ -37,7 +48,11 @@ const kittyPrompts = {
     // Write your annotation here as a comment
   },
 
-  growUp() {
+  growUp(pets) {
+    var grownUpPets = pets.filter((pet) => {
+      return pet.age += 2
+    });
+    return grownUpPets;
     // Return an array of kitties who have all grown up by 2 years e.g.
     // [{
     //   name: 'Felicia',
@@ -50,8 +65,6 @@ const kittyPrompts = {
     //   color: 'orange'
     // },
     // ...etc]
-
-    /* CODE GOES HERE */
   }
 };
 
@@ -454,13 +467,24 @@ const nationalParksPrompts = {
 // DATASET: breweries from ./datasets/breweries
 const breweryPrompts = {
   getBeerCount() {
+     var beerCount = []
+      breweries.forEach((brewery) => {
+      beerCount.push(brewery.beers.length) 
+      // var sum = beerCount.reduce((acc, totalBeers) => {
+      //   acc + totalBeers
+      // }, 0);
+      //   return sum
+      // });
+      // console.log(beerCount)
+      })
+      return beerCount;
     // Return the total beer count of all beers for every brewery e.g.
     // 40
 
     /* CODE GOES HERE */
 
     // Annotation:
-    // Write your annotation here as a comment
+    //I want to 
   },
 
   getBreweryBeerCount() {
