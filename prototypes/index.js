@@ -124,20 +124,35 @@ const clubPrompts = {
 // DATASET: mods from ./datasets/mods
 const modPrompts = {
   studentsPerMod() {
-    // Return an array of objects where the keys are mod (the number of the module)
-    // and studentsPerInstructor (how many students per instructor there are for that mod) e.g.
-    // [
-    //   { mod: 1, studentsPerInstructor: 9 },
-    //   { mod: 2, studentsPerInstructor: 11 },
-    //   { mod: 3, studentsPerInstructor: 10 },
-    //   { mod: 4, studentsPerInstructor: 8 }
-    // ]
-
-    /* CODE GOES HERE */
-
-    // Annotation:
-    // Write your annotation here as a comment
-  }
+    const getStudentInstructorRatio = 
+      mods.map((module) => {
+        return {
+       mod: module.mod,
+       studentsPerInstructor: (module.students / module.instructors),
+        }
+      })
+    //  console.log(getStudentsInstructorRatio)
+     return getStudentInstructorRatio;
+      
+       // Return an array of objects where the keys are mod (the number of the module)
+       // and studentsPerInstructor (how many students per instructor there are for that mod) e.g.
+       // [
+       //   { mod: 1, studentsPerInstructor: 9 },
+       //   { mod: 2, studentsPerInstructor: 11 },
+       //   { mod: 3, studentsPerInstructor: 10 },
+       //   { mod: 4, studentsPerInstructor: 8 }
+       // ]
+   
+       /* CODE GOES HERE */
+   
+       // Annotation:
+       //I need to create a new object in the method
+       //I need to iterate over the array of objects to find
+       //the mod # as well as the students # and instructors #
+       //with the sutdetns and instructors #'s, I need to find the 
+       //ratio of students per instructor
+       //per mod
+     }
 };
 
 
@@ -467,17 +482,12 @@ const nationalParksPrompts = {
 // DATASET: breweries from ./datasets/breweries
 const breweryPrompts = {
   getBeerCount() {
-     var beerCount = []
-      breweries.forEach((brewery) => {
-      beerCount.push(brewery.beers.length) 
-      // var sum = beerCount.reduce((acc, totalBeers) => {
-      //   acc + totalBeers
-      // }, 0);
-      //   return sum
-      // });
-      // console.log(beerCount)
-      })
+    const beerCount = breweries.reduce((acc, beer) => {
+      acc += beer.beers.length
+      return acc
+     }, 0)
       return beerCount;
+ 
     // Return the total beer count of all beers for every brewery e.g.
     // 40
 
@@ -488,6 +498,16 @@ const breweryPrompts = {
   },
 
   getBreweryBeerCount() {
+    // console.log('name: ', breweries[0].name)
+    // console.log('beerCount: ', breweries[0].beers.length)
+    const breweryBeerCount = breweries.map((brewery) => {
+       return {
+          name: brewery.name,
+          beerCount: brewery.beers.length        
+       };
+  });
+    return breweryBeerCount;
+
     // Return an array of objects where each object has the name of a brewery
     // and the count of the beers that brewery has e.g.
     // [
@@ -503,6 +523,17 @@ const breweryPrompts = {
   },
 
   findHighestAbvBeer() {
+      const allBeers = [];
+      const findBeers = breweries.forEach((brewery) => {
+          brewery.beers.forEach((beer) => {
+            allBeers.push(beer)
+          })
+      })
+     const highestAbvBeer = allBeers.sort((firstBeer, lastBeer) => {
+        return lastBeer.abv - firstBeer.abv
+      });
+       return highestAbvBeer[0]
+
     // Return the beer which has the highest ABV of all beers
     // e.g.
     // { name: 'Barrel Aged Nature\'s Sweater', type: 'Barley Wine', abv: 10.9, ibu: 40 }
@@ -510,7 +541,8 @@ const breweryPrompts = {
     /* CODE GOES HERE */
 
     // Annotation:
-    // Write your annotation here as a comment
+    // go through each brewery and find each abv in the brewery
+    // sort through this list of abv for the highest abv 
   }
 };
 
